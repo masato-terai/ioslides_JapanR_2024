@@ -1,3 +1,11 @@
+<<<<<<< HEAD
 .Rhistory
 .Rproj.user/
 *.Rproj
+=======
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+ioslides_JapanR_2024.Rproj
+>>>>>>> trial
