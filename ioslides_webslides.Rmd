@@ -1,7 +1,7 @@
 ---
 title: "ioslidesでwebスライド作成"
 output: html_document
-date: "2024-11-14"
+date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
 ---
 
 ```{r setup, include=FALSE}
