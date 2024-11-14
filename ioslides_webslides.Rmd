@@ -1,6 +1,8 @@
 ---
-title: "ioslidesでwebスライド作成"
+title: "LT: ioslidesでwebスライド作成"
 output: html_document
+author: "寺井 雅人（愛知工科大学）"
+subtitle: "Japan.R 2024"
 date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
 ---
 
