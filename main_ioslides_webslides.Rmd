@@ -1,10 +1,14 @@
 ---
 title: "LT: ioslidesでwebスライド作成"
-#output: html_document
 output:
-  ioslides_presentation:
-    transition: default
-author: "寺井 雅人（愛知工科大学）"
+  revealjs::revealjs_presentation:
+    theme: solarized
+    transition: slide
+    self_contained: false
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    reveal_plugins: ["chalkboard", "menu"]
 subtitle: "Japan.R 2024"
 date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
 ---
@@ -18,17 +22,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ### 寺井雅人
 
 - 所属：愛知工科大学（助教）
-- 研究：外国語理解の過程を研究。心理実験を行い、反応測度などを統計モデルで分析。
+- 研究：心理実験を行い、反応測度などを統計モデルで分析。
 - R歴：2018年～現在に至る
 - X: [\@uniquefreshman](https://twitter.com/uniquefreshman)
-- RやPythonやGASの記事：[Qiita](https://qiita.com/masato-terai)
+- .Rとの出会い: 2018年の名古屋大でのNagoya.R
 
-<div style="border: 3px solid blue; padding: 10px; background-color: #e6f7ff;">
+## 話したい事
 
-名古屋大学の院生時代、Nagoya.Rが大学構内で開催され参加して以来、Tokyo.RやJapan.Rにオンライン参加してます。
+- 簡単に分析ファイルをスライド資料に変えられるioslidesがある
+- その結果コピペや表の数字の写し作業チェックから解放
+- おそらくあと4分もないから早口です
+- 今回の詳しい内容はこちら：[Qiita](https://qiita.com/masato-terai)
 
-</div>
+## ioslidesとは
+- ここに説明を書く
 
+# スライドの作り方
+
+## 準備するもの
+- R markdownファイル
+
+## やり方
+- YAMLヘッダーを変更
 
 ```{markdown}         
 title: "Untitled"
@@ -69,9 +84,18 @@ output:
 
 # 最後に
 - もう少し細かい設定をするなら```Reveal.js```
+- このスライドはReveal.jsです。
+-- transitionやtheme、その他にも様々な設定ができます。
+-- Rmdからのスライド作成であれば、ioslidesから入ればOK?
+-- 学会発表などであればioslidesがシンプルでよさそう
+- LTの時間では紹介しきれない！
 
 # Reference
 - https://codingclubuc3m.rbind.io/post/2019-09-24/
+- https://github.com/rstudio/revealjs
+
+# Ref for reveal.js
+- https://revealjs.com/themes/
 
 # Note
 10-20ページ
