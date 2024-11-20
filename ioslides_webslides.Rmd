@@ -1,6 +1,9 @@
 ---
 title: "LT: ioslidesでwebスライド作成"
-output: html_document
+#output: html_document
+output:
+  ioslides_presentation:
+    transition: default
 author: "寺井 雅人（愛知工科大学）"
 subtitle: "Japan.R 2024"
 date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
@@ -52,6 +55,23 @@ date: "2024-04-15"
 }
 </style>
 ```
+
+## その他の細かい設定
+- スライドの移行スピード
+    - default, slower, faster
+```{markdown}         
+title: "LT: ioslidesでwebスライド作成"
+#output: html_document
+output:
+  ioslides_presentation:
+    transition: slower
+```
+
+# 最後に
+- もう少し細かい設定をするなら```Reveal.js```
+
+# Reference
+- https://codingclubuc3m.rbind.io/post/2019-09-24/
 
 # Note
 10-20ページ
