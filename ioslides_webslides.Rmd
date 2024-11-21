@@ -1,53 +1,19 @@
 ---
-title: "LT: ioslidesでwebスライド作成"
-#output: html_document
+title: "ioslides"
 output:
   ioslides_presentation:
+    incremental: true
     transition: default
-author: "寺井 雅人（愛知工科大学）"
-subtitle: "Japan.R 2024"
-date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
+    logo: Mydog.jpg
+author: "寺井 雅人"
+date: "Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 自己紹介
-
-### 寺井雅人
-
-- 所属：愛知工科大学（助教）
-- 研究：外国語理解の過程を研究。心理実験を行い、反応測度などを統計モデルで分析。
-- R歴：2018年～現在に至る
-- X: [\@uniquefreshman](https://twitter.com/uniquefreshman)
-- RやPythonやGASの記事：[Qiita](https://qiita.com/masato-terai)
-
-<div style="border: 3px solid blue; padding: 10px; background-color: #e6f7ff;">
-
-名古屋大学の院生時代、Nagoya.Rが大学構内で開催され参加して以来、Tokyo.RやJapan.Rにオンライン参加してます。
-
-</div>
-
-
-```{markdown}         
-title: "Untitled"
-output: ioslides_presentation
-date: "2024-04-15"
-```
-
--   **\#**で定義するレベル分けでスライドの区切りが代わる
-
-    -   **\#**でスライドのセクション見出し
-    -   **\##**で新しいページ
-    -   **\###**ページ内の太文字
-
--   枠にとらわれない！
-
-    -   以下のチャンクを先頭に入れると、スクロール可能なスライドになる（チャンク内はrではなく、`=html`にする）。
-    -   注意点として、タッチパッドや、マウスホイールでスクロールできますが、スクロールバーを掴んでスクロールはできません。
-
-```{markdown}         
+```{=html}         
 <style>
   slides > slide {
     overflow-x: auto !important;
@@ -56,23 +22,59 @@ date: "2024-04-15"
 </style>
 ```
 
-## その他の細かい設定
-- スライドの移行スピード
-    - default, slower, faster
-```{markdown}         
-title: "LT: ioslidesでwebスライド作成"
-#output: html_document
-output:
-  ioslides_presentation:
-    transition: slower
+# セクション見出し（ # ）
+
+## スライドのタイトル（ ## ）
+
+### マスターテキスト（ ### ）
+
+## 簡単なアニメーション
+- Incremental Bullet
+- Bulletポイントごとに表示します。
+
+## test
+```{r}
+print(1 + 2)
 ```
 
-# 最後に
-- もう少し細かい設定をするなら```Reveal.js```
 
-# Reference
-- https://codingclubuc3m.rbind.io/post/2019-09-24/
+## 水平スクロール
 
-# Note
-10-20ページ
-floreパッケージでハイライトを行う
+```{r, echo = F, warning=FALSE, message=FALSE}
+library(kableExtra)
+library(tidyverse)
+
+mpg_list <- split(mtcars$mpg, mtcars$cyl)
+disp_list <- split(mtcars$disp, mtcars$cyl)
+inline_plot <- data.frame(gspec = mtcars$qsec, mpg_box = "", mpg_hist = "",
+                          mpg_line1 = "", mpg_line2 = "",
+                          mpg_points1 = "", mpg_points2 = "", mpg_poly = "")
+inline_plot %>%
+  kbl(booktabs = TRUE, caption = "Table 1 Summary of Mtcars") %>%
+  kable_paper(full_width = FALSE) %>%
+  column_spec(2, image = spec_boxplot(mpg_list)) %>%
+  column_spec(3, image = spec_hist(mpg_list)) %>%
+  column_spec(4, image = spec_plot(mpg_list, same_lim = TRUE)) %>%
+  column_spec(5, image = spec_plot(mpg_list, same_lim = FALSE)) %>%
+  column_spec(6, image = spec_plot(mpg_list, type = "p")) %>%
+  column_spec(7, image = spec_plot(mpg_list, disp_list, type = "p")) %>%
+  column_spec(8, image = spec_plot(mpg_list, polymin = 5))
+
+```
+
+
+## 上下左右スクロール
+![](C:/Users/terai-masato/Documents/ioslides_JapanR_2024/mydog.jpg)
+
+## 二段組も可能
+<div class="columns-2">
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+</div>
+
+
+## Getting up | What I like to do first thing
