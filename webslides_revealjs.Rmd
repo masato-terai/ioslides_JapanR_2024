@@ -4,13 +4,16 @@ output:
   revealjs::revealjs_presentation:
     theme: solarized
     transition: slide
+    center: true
     self_contained: false
+    incremental: true
+    previewLinks: true
     reveal_options:
       slideNumber: true
       previewLinks: true
     reveal_plugins: ["chalkboard", "menu"]
 subtitle: "Japan.R 2024"
-date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d %X')`"
+date: "Published:2024-11-14, Last Update(JST): `r format(Sys.time(), '%Y-%m-%d')`"
 ---
 
 ```{r setup, include=FALSE}
@@ -22,20 +25,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ### 寺井雅人
 
 - 所属：愛知工科大学（助教）
-- 研究：心理実験を行い、反応測度などを統計モデルで分析。
-- R歴：2018年～現在に至る
-- X: [\@uniquefreshman](https://twitter.com/uniquefreshman)
-- .Rとの出会い: 2018年の名古屋大でのNagoya.R
+  - X: [\@uniquefreshman](https://x.com/uniquefreshman)
+  - [Researchmap](https://researchmap.jp/terai-research)
+- 研究：言語（母語、外国語）理解のメカニズム
+- R歴：2018年-
+- .Rとの出会い: 名古屋大でのNagoya.R (2018年)
 
 ## 話したい事
 
 - 簡単に分析ファイルをスライド資料に変えられるioslidesがある
 - その結果コピペや表の数字の写し作業チェックから解放
-- おそらくあと4分もないから早口です
-- 今回の詳しい内容はこちら：[Qiita](https://qiita.com/masato-terai)
 
-## ioslidesとは
-- ここに説明を書く
+
+
+## ioslides
+- rmarkdownパッケージに標準で備わっている
 
 # スライドの作り方
 
@@ -43,60 +47,134 @@ knitr::opts_chunk$set(echo = TRUE)
 - R markdownファイル
 
 ## やり方
-- YAMLヘッダーを変更
+- YAMLヘッダーのoutputに```ioslides_presentation```と入れるだけ！
 
-```{markdown}         
+::: fragment
+
+````
 title: "Untitled"
 output: ioslides_presentation
 date: "2024-04-15"
-```
+````
+:::
 
--   **\#**で定義するレベル分けでスライドの区切りが代わる
 
+## スライドの区切り
+- **\#**で定義するレベル分けでスライドの区切りがきまる
     -   **\#**でスライドのセクション見出し
     -   **\##**で新しいページ
     -   **\###**ページ内の太文字
 
--   枠にとらわれない！
+## 簡単なアニメーションはできる
+- Incremental bullet
+- ```incremental: true```を追加
 
-    -   以下のチャンクを先頭に入れると、スクロール可能なスライドになる（チャンク内はrではなく、`=html`にする）。
-    -   注意点として、タッチパッドや、マウスホイールでスクロールできますが、スクロールバーを掴んでスクロールはできません。
 
-```{markdown}         
+::: fragment
+
+````
+title: "Untitled"
+output: ioslides_presentation:
+    incremental: true
+date: "2024-04-15"
+````
+
+:::
+
+
+## スライドの操作法も多数
+### キーと操作の一覧
+
+|  キー  | 機能                              |
+|:------:|-----------------------------------|
+|   f    | フルスクリーンモード              |
+|   w    | ワイドスクリーンモード            |
+|   o    | スライドの全体を確認              |
+|   h    | コードの強調                      |
+|   p    | 発表者ノートを表示（発表者ノートを入れてれば） |
+
+
+## おすすめポイント
+
+## 簡単にスライドを作成できる
+- "#"でレベル分け（スライドの区切り）を意識しておけばYAMLヘッダーの変更だけでOK
+- シンプルな機能しかないく、構造が理解しやすい
+
+## シンプルだが、拡張性もある
+
+### 上下左右スクロール可能
+-   以下のチャンクを入れると、スクロール可能なスライドになる
+  - チャンクは`r`ではなく、`=html`
+
+::: fragment
+
+````         
 <style>
   slides > slide {
     overflow-x: auto !important;
     overflow-y: auto !important;
 }
 </style>
-```
+````
+:::
 
-## その他の細かい設定
-- スライドの移行スピード
-    - default, slower, faster
-```{markdown}         
-title: "LT: ioslidesでwebスライド作成"
-#output: html_document
+- スクロールバーを掴んでスクロールはできません😭
+
+## スライドを装飾
+### ロゴを追加
+- 表紙、各スライドの左下に表示
+  - デフォルトは85 X 85 ピクセル
+  - CSSを触れば変更可能
+
+::: fragment
+
+````
 output:
   ioslides_presentation:
-    transition: slower
-```
+    logo: Mydog.jpg
+````
+
+:::
+
+
+## 二段組も可能
+
+::: fragment
+
+````
+<div class="columns-2">
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+</div>
+````
+:::
+
+
+## 妥協しないといけない点
+<br>
+
+### アニメーション
+
+### 複雑な装飾
+
+- やろうと思えばできる機能もあるが、CSSに対する知識などが必要
 
 # 最後に
-- もう少し細かい設定をするなら```Reveal.js```
-- このスライドはReveal.jsです。
--- transitionやtheme、その他にも様々な設定ができます。
--- Rmdからのスライド作成であれば、ioslidesから入ればOK?
--- 学会発表などであればioslidesがシンプルでよさそう
-- LTの時間では紹介しきれない！
+- 作成が容易で、機能がシンプル！
+  - スライドをオシャレにしたいなら```Reveal.js```
+
+- 学会発表ではioslidesで十分！
+
+- より詳しい内容はこちら：[R Markdownでスライドを作成（ioslides）](https://qiita.com/masato-terai/items/664c5ee782f690260eca)
 
 # Reference
-- https://codingclubuc3m.rbind.io/post/2019-09-24/
-- https://github.com/rstudio/revealjs
+- 📚 [改訂2版 RユーザのためのRStudio［実践］入門－tidyverseによるモダンな分析フローの世界](https://www.amazon.co.jp/%E6%94%B9%E8%A8%822%E7%89%88-R%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AERStudio-%E5%AE%9F%E8%B7%B5-%E5%85%A5%E9%96%80%E3%80%9Ctidyverse%E3%81%AB%E3%82%88%E3%82%8B%E3%83%A2%E3%83%80%E3%83%B3%E3%81%AA%E5%88%86%E6%9E%90%E3%83%95%E3%83%AD%E3%83%BC%E3%81%AE%E4%B8%96%E7%95%8C-%E6%9D%BE%E6%9D%91/dp/4297121700)
+- 💻[Mastering R presentations](https://codingclubuc3m.rbind.io/post/2019-09-24/)
 
-# Ref for reveal.js
-- https://revealjs.com/themes/
+## Embedded ioslides
 
-# Note
-10-20ページ
-floreパッケージでハイライトを行う
+<iframe src="" width="100%" height="600px" frameborder="0"></iframe>
