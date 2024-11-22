@@ -5,7 +5,6 @@
 .RData
 .Ruserdata
 ioslides_JapanR_2024.Rproj
-*.html
 *_files
 ioslides_webslides.Rmd
 *.jpg
