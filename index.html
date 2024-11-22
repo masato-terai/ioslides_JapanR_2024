@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>LT: ioslidesでwebスライド作成</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="webslides_revealjs_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="webslides_revealjs_files/reveal.js-3.3.0.1/css/theme/solarized.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal .slide-menu-button {
+      left: 105px !important;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="webslides_revealjs_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="webslides_revealjs_files/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+    <link href="webslides_revealjs_files/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">LT: ioslidesでwebスライド作成</h1>
+  <h1 class="subtitle">Japan.R 2024</h1>
+    <h3 class="date">Published:2024-11-14, Last Update(JST):
+2024-11-22</h3>
+</section>
+
+<section id="自己紹介" class="slide level2">
+<h2>自己紹介</h2>
+<h3 id="寺井雅人">寺井雅人</h3>
+<ul>
+<li class="fragment">所属：愛知工科大学（助教）
+<ul>
+<li class="fragment">X: <a
+href="https://x.com/uniquefreshman">@uniquefreshman</a></li>
+<li class="fragment"><a
+href="https://researchmap.jp/terai-research">Researchmap</a></li>
+</ul></li>
+<li class="fragment">研究：言語（母語、外国語）理解のメカニズム</li>
+<li class="fragment">R歴：2018年-</li>
+<li class="fragment">.Rとの出会い: 名古屋大でのNagoya.R (2018年)</li>
+</ul>
+</section>
+<section id="話したい事" class="slide level2">
+<h2>話したい事</h2>
+<ul>
+<li
+class="fragment">簡単に分析ファイルをスライド資料に変えられるioslidesがある</li>
+<li
+class="fragment">その結果コピペや表の数字の写し作業チェックから解放</li>
+</ul>
+</section>
+<section id="ioslides" class="slide level2">
+<h2>ioslides</h2>
+<ul>
+<li class="fragment">rmarkdownパッケージに標準で備わっている</li>
+</ul>
+</section>
+<section>
+<section id="スライドの作り方" class="title-slide slide level1">
+<h1>スライドの作り方</h1>
+
+</section>
+<section id="準備するもの" class="slide level2">
+<h2>準備するもの</h2>
+<ul>
+<li class="fragment">R markdownファイル</li>
+</ul>
+</section>
+<section id="やり方" class="slide level2">
+<h2>やり方</h2>
+<ul>
+<li
+class="fragment">YAMLヘッダーのoutputに<code>ioslides_presentation</code>と入れるだけ！</li>
+</ul>
+<div class="fragment">
+<pre><code>title: &quot;Untitled&quot;
+output: ioslides_presentation
+date: &quot;2024-04-15&quot;</code></pre>
+</div>
+</section>
+<section id="スライドの区切り" class="slide level2">
+<h2>スライドの区切り</h2>
+<ul>
+<li
+class="fragment"><strong>#</strong>で定義するレベル分けでスライドの区切りがきまる
+<ul>
+<li class="fragment"><strong>#</strong>でスライドのセクション見出し</li>
+<li class="fragment"><strong>##</strong>で新しいページ</li>
+<li class="fragment"><strong>###</strong>ページ内の太文字</li>
+</ul></li>
+</ul>
+</section>
+<section id="簡単なアニメーションはできる" class="slide level2">
+<h2>簡単なアニメーションはできる</h2>
+<ul>
+<li class="fragment">Incremental bullet</li>
+<li class="fragment"><code>incremental: true</code>を追加</li>
+</ul>
+<div class="fragment">
+<pre><code>title: &quot;Untitled&quot;
+output: ioslides_presentation:
+    incremental: true
+date: &quot;2024-04-15&quot;</code></pre>
+</div>
+</section>
+<section id="スライドの操作法も多数" class="slide level2">
+<h2>スライドの操作法も多数</h2>
+<h3 id="キーと操作の一覧">キーと操作の一覧</h3>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">キー</th>
+<th>機能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">f</td>
+<td>フルスクリーンモード</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">w</td>
+<td>ワイドスクリーンモード</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">o</td>
+<td>スライドの全体を確認</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">h</td>
+<td>コードの強調</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">p</td>
+<td>発表者ノートを表示（発表者ノートを入れてれば）</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="おすすめポイント" class="slide level2">
+<h2>おすすめポイント</h2>
+</section>
+<section id="簡単にスライドを作成できる" class="slide level2">
+<h2>簡単にスライドを作成できる</h2>
+<ul>
+<li
+class="fragment">“#”でレベル分け（スライドの区切り）を意識しておけばYAMLヘッダーの変更だけでOK</li>
+<li class="fragment">シンプルな機能しかないく、構造が理解しやすい</li>
+</ul>
+</section>
+<section id="シンプルだが拡張性もある" class="slide level2">
+<h2>シンプルだが、拡張性もある</h2>
+<h3 id="上下左右スクロール可能">上下左右スクロール可能</h3>
+<ul>
+<li
+class="fragment">以下のチャンクを入れると、スクロール可能なスライドになる</li>
+<li
+class="fragment">チャンクは<code>r</code>ではなく、<code>=html</code></li>
+</ul>
+<div class="fragment">
+<pre><code>&lt;style&gt;
+  slides &gt; slide {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+}
+&lt;/style&gt;</code></pre>
+</div>
+<ul>
+<li class="fragment">スクロールバーを掴んでスクロールはできません😭</li>
+</ul>
+</section>
+<section id="スライドを装飾" class="slide level2">
+<h2>スライドを装飾</h2>
+<h3 id="ロゴを追加">ロゴを追加</h3>
+<ul>
+<li class="fragment">表紙、各スライドの左下に表示
+<ul>
+<li class="fragment">デフォルトは85 X 85 ピクセル</li>
+<li class="fragment">CSSを触れば変更可能</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<pre><code>output:
+  ioslides_presentation:
+    logo: Mydog.jpg</code></pre>
+</div>
+</section>
+<section id="二段組も可能" class="slide level2">
+<h2>二段組も可能</h2>
+<div class="fragment">
+<pre><code>&lt;div class=&quot;columns-2&quot;&gt;
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+HTMLで記載すればできます
+&lt;/div&gt;</code></pre>
+</div>
+</section>
+<section id="妥協しないといけない点" class="slide level2">
+<h2>妥協しないといけない点</h2>
+<p><br></p>
+<h3 id="アニメーション">アニメーション</h3>
+<h3 id="複雑な装飾">複雑な装飾</h3>
+<ul>
+<li
+class="fragment">やろうと思えばできる機能もあるが、CSSに対する知識などが必要</li>
+</ul>
+</section></section>
+<section id="最後に" class="title-slide slide level1">
+<h1>最後に</h1>
+<ul>
+<li class="fragment"><p>作成が容易で、機能がシンプル！</p>
+<ul>
+<li
+class="fragment">スライドをオシャレにしたいなら<code>reveal.js</code>がおすすめ</li>
+</ul></li>
+<li class="fragment"><p>学会発表ではioslidesで十分！</p></li>
+<li class="fragment"><p>より詳しい内容はこちら：<a
+href="https://qiita.com/masato-terai/items/664c5ee782f690260eca">R
+Markdownでスライドを作成（ioslides）</a></p></li>
+</ul>
+</section>
+
+<section>
+<section id="reference" class="title-slide slide level1">
+<h1>Reference</h1>
+<ul>
+<li class="fragment">📚 <a
+href="https://www.amazon.co.jp/%E6%94%B9%E8%A8%822%E7%89%88-R%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AERStudio-%E5%AE%9F%E8%B7%B5-%E5%85%A5%E9%96%80%E3%80%9Ctidyverse%E3%81%AB%E3%82%88%E3%82%8B%E3%83%A2%E3%83%80%E3%83%B3%E3%81%AA%E5%88%86%E6%9E%90%E3%83%95%E3%83%AD%E3%83%BC%E3%81%AE%E4%B8%96%E7%95%8C-%E6%9D%BE%E6%9D%91/dp/4297121700">改訂2版
+RユーザのためのRStudio［実践］入門－tidyverseによるモダンな分析フローの世界</a></li>
+<li class="fragment">💻<a
+href="https://codingclubuc3m.rbind.io/post/2019-09-24/">Mastering R
+presentations</a></li>
+</ul>
+</section>
+<section id="embedded-ioslides" class="slide level2">
+<h2>Embedded ioslides</h2>
+<iframe src width="100%" height="600px" frameborder="0">
+</iframe>
+</section></section>
+    </div>
+  </div>
+
+  <script src="webslides_revealjs_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="webslides_revealjs_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        menu: {
+   
+    
+    
+    
+    
+    
+    
+ 
+          custom: false,
+          themes: false,
+          transitions: false
+        },
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'webslides_revealjs_files/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+          { src: 'webslides_revealjs_files/reveal.js-3.3.0.1/plugin/menu/menu.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
